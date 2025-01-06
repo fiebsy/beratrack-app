@@ -10,7 +10,7 @@ export async function GET() {
         ? {
             credentials: {
               client_email: process.env.GOOGLE_CLIENT_EMAIL,
-              private_key: process.env.GOOGLE_PRIVATE_KEY,
+              private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
             }
           }
         : {
@@ -34,6 +34,8 @@ export async function GET() {
       data: rows[0],
       projectId: process.env.GOOGLE_CLOUD_PROJECT,
       serviceAccount: process.env.GOOGLE_CLIENT_EMAIL,
+      privateKeyLength: process.env.GOOGLE_PRIVATE_KEY?.length,
+      privateKeyStart: process.env.GOOGLE_PRIVATE_KEY?.substring(0, 50),
     });
   } catch (error) {
     console.error('Credentials Test Error:', error);
@@ -44,6 +46,9 @@ export async function GET() {
         error: error instanceof Error ? error.message : 'Unknown error',
         projectId: process.env.GOOGLE_CLOUD_PROJECT,
         serviceAccount: process.env.GOOGLE_CLIENT_EMAIL,
+        privateKeyLength: process.env.GOOGLE_PRIVATE_KEY?.length,
+        privateKeyStart: process.env.GOOGLE_PRIVATE_KEY?.substring(0, 50),
+        fullError: error instanceof Error ? error.stack : String(error),
       },
       { status: 500 }
     );

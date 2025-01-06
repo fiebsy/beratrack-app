@@ -8,7 +8,8 @@ const bigquery = new BigQuery({
         // In Vercel, use individual credential environment variables
         credentials: {
           client_email: process.env.GOOGLE_CLIENT_EMAIL,
-          private_key: process.env.GOOGLE_PRIVATE_KEY,
+          // Handle both formats of private key
+          private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
         }
       }
     : {
