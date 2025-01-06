@@ -1,7 +1,20 @@
 import { BigQuery } from '@google-cloud/bigquery';
 import type { GlossaryRole } from '@/components/glossary/types';
 
-const bigquery = new BigQuery();
+const bigquery = new BigQuery({
+  projectId: process.env.GOOGLE_CLOUD_PROJECT || 'pickaxe-dashboard',
+  ...(process.env.VERCEL
+    ? {
+        credentials: {
+          client_email: process.env.GOOGLE_CLIENT_EMAIL,
+          private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+        }
+      }
+    : {
+        keyFilename: './service-account.json'
+      }),
+  location: 'US'
+});
 
 export async function getGlossaryData(): Promise<GlossaryRole[]> {
   const query = `
