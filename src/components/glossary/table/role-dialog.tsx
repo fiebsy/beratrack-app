@@ -196,7 +196,7 @@ export function RoleDialog({ role, onOpenChange }: RoleDialogProps) {
                     />
                   </div>
 
-                  <p className="text-xs text-muted-foreground/80">
+                  <p className="text-sm text-muted-foreground/80">
                     {tier.tooltip}
                   </p>
                 </div>
