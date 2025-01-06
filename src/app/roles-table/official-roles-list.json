@@ -1,0 +1,288 @@
+{
+    "community_roles": {
+      "100_real_user": {
+        "role_name": "%100 Real User",
+        "description": "This shows that you have successfully passed the bot verification. You are either a BERA or a bot good enough to bypass the bot verification. Congrats."
+      },
+      "bera_cub": {
+        "role_name": "Bera Cub",
+        "description": "You can get this role by community engagement and contributions in discord. You are rising fast but you're still just a baby."
+      },
+      "super_cub": {
+        "role_name": "Super Cub",
+        "description": "There is no official information on Super Cub role."
+      },
+      "bug_blaster": {
+        "role_name": "Bug Blaster",
+        "description": "This caterpillar means that you are actively supporting the testnet process and finding or trying to help some important bugs. Thanks."
+      },
+      "bera_helper": {
+        "role_name": "Bera Helper",
+        "description": "It is a role given to those who have been active, knowledgeable, helpful, polite and who love to stay for a long time."
+      },
+      "super_helper": {
+        "role_name": "Super Helper and above",
+        "description": "Wow. Everything helpers do, they do better. They don't complain, they produce solutions."
+      },
+      "helpful_opinion_leader": {
+        "role_name": "Helpful Opinion Leader",
+        "description": "Community members who make content, host events, and create art."
+      },
+      "princess": {
+        "role_name": "Princess",
+        "description": "This role is for attention-seeking females. Your name'll look cooler pink. If you are a helpful, beautiful, and hot BERA, it is possible to get this. IDK ask to FW."
+      },
+      "nothing": {
+        "role_name": "Nothing",
+        "description": "Kind of nothing you can't get unless you're some of the BERA activities winner."
+      },
+      "actually_nothing": {
+        "role_name": "Actually Nothing",
+        "description": "Kind of nothing you can't get unless you're some of the BERA activities winner."
+      },
+      "absolutely_nothing": {
+        "role_name": "Absolutely Nothing",
+        "description": "Kind of nothing you can't get unless you're some of the BERA activities winner."
+      },
+      "truly_nothing": {
+        "role_name": "Truly Nothing",
+        "description": "There is no official information on this role."
+      },
+      "bera": {
+        "role_name": "Bera",
+        "description": "If you have one of the official Bera NFTs, you can get this one."
+      },
+      "good_at_poker": {
+        "role_name": "I'm good at poker",
+        "description": "A special role for gambler BERAs. You won the poker tournament. Congrats."
+      },
+      "beratarded": {
+        "role_name": "Beratarded",
+        "description": "There is no official information on this role."
+      },
+      "double_beratarded": {
+        "role_name": "Double Beratarded",
+        "description": "There is no official information on this role."
+      },
+      "certified_nothing": {
+        "role_name": "Certified Nothing",
+        "description": "There is no official information on this role."
+      },
+      "nothing_premium_plus": {
+        "role_name": "Nothing Premium+",
+        "description": "There is no official information on this role."
+      }
+    },
+    "nft_roles": {
+      "original_gangster": {
+        "role_name": "Original Gangster",
+        "description": "OG Bong Bear Holders"
+      },
+      "bera_holder": {
+        "role_name": "Bera",
+        "description": "Bear Holder - Any Collection"
+      },
+      "jarred_up": {
+        "role_name": "Jarred Up",
+        "description": "Honey Comb NFT Holders"
+      },
+      "yeetarded": {
+        "role_name": "YeeTARDED",
+        "description": "Yeetard NFT holders"
+      },
+      "smilee_bera": {
+        "role_name": "Smilee Bera",
+        "description": "Smilee beras holders"
+      },
+      "honeypotted": {
+        "role_name": "HoneyPOTTED",
+        "description": "Honeygenesis holders"
+      },
+      "junky_ursa": {
+        "role_name": "Junky URSA",
+        "description": "The proof of Junkie holders"
+      },
+      "beratone_founders_edition": {
+        "role_name": "Beratone FOUNDER'S Edition",
+        "description": "Sailcloth holders"
+      },
+      "beradromer": {
+        "role_name": "BeraDROMER",
+        "description": "Tour de berance holders"
+      },
+      "ramen_bera": {
+        "role_name": "Ramen Bera",
+        "description": "HungryBera holders"
+      },
+      "beraborrower": {
+        "role_name": "Beraborrower",
+        "description": "Big fat beras holders"
+      },
+      "beramonium_holder": {
+        "role_name": "Beramonium HOLDER",
+        "description": "Beramonium Chronicles: Genesis holders"
+      },
+      "beradelic_berasig": {
+        "role_name": "Beradelic - BeraSig",
+        "description": "Beradelic holders"
+      },
+      "berahorse_jockey": {
+        "role_name": "Berahorse Jockey",
+        "description": "Bera Horses holders"
+      },
+      "berally_tripper": {
+        "role_name": "Berally Tripper",
+        "description": "Beracid holders"
+      },
+      "memeswap_bruv": {
+        "role_name": "Memeswap Bruv",
+        "description": "Bruvvprint holders"
+      },
+      "burrbear_printooor": {
+        "role_name": "BurrBear Printooor",
+        "description": "Holders of Berome Powell or Bearet Yellen NFTs"
+      },
+      "fable_bera": {
+        "role_name": "Fable Bera",
+        "description": "Fable beras holders"
+      },
+      "berapong_house": {
+        "role_name": "BeraPong House",
+        "description": "BeraPong Genesis holders"
+      },
+      "cubhubd": {
+        "role_name": "CubHUB'd",
+        "description": "CubHub holders"
+      },
+      "onikuma_bera": {
+        "role_name": "Onikuma Bera",
+        "description": "Onikuma Genesis NFT holders"
+      },
+      "beracian": {
+        "role_name": "Beracian",
+        "description": "Berac or BeracPoL holders"
+      },
+      "beraboy": {
+        "role_name": "BeraBOY",
+        "description": "BERABOYZ holders"
+      },
+      "berapunk": {
+        "role_name": "BeraPUNK",
+        "description": "Berapunk holders"
+      },
+      "holistic_bera": {
+        "role_name": "Holistic BERA",
+        "description": "NPC Beras holders"
+      },
+      "narra_bera": {
+        "role_name": "Narra Bera",
+        "description": "NarraZAI holders"
+      },
+      "wizwoods_bera": {
+        "role_name": "Wizwoods Bera",
+        "description": "Chrono-Wizard Bear holders"
+      },
+      "booga_bera": {
+        "role_name": "Booga Bera",
+        "description": "Booga bera holders"
+      },
+      "happee_bera": {
+        "role_name": "Happee Bera",
+        "description": "Happee bera holders"
+      },
+      "pumpbera": {
+        "role_name": "PumpBera",
+        "description": "PumpBera holders"
+      },
+      "oasisopus": {
+        "role_name": "OasisOpus",
+        "description": "OasisOpus holders"
+      },
+      "wagmibera": {
+        "role_name": "Wagmibera",
+        "description": "WagmiBera holders"
+      },
+      "beradeluna_beraji_bears": {
+        "role_name": "BeraDeluna-Beraji Bears",
+        "description": "Beradeluna holders"
+      },
+      "beraroot": {
+        "role_name": "BeraRoot",
+        "description": "BlueBeras holders"
+      },
+      "satori": {
+        "role_name": "Satori",
+        "description": "Satori holders"
+      },
+      "berautistics": {
+        "role_name": "Berautistics",
+        "description": "Berautistics holders"
+      },
+      "prets_bera": {
+        "role_name": "Pret's Bera",
+        "description": "Prets_Bera holders"
+      },
+      "skemmy_bera": {
+        "role_name": "Skemmy Bera",
+        "description": "Skemmy beras holders"
+      },
+      "hornee_bera": {
+        "role_name": "Hornee Bera",
+        "description": "Hornee Beras holders"
+      },
+      "azex_bera": {
+        "role_name": "AZEx Bera",
+        "description": "AZEx Bear NFT holders"
+      },
+      "beraswap": {
+        "role_name": "BeraSwap",
+        "description": "BeraSwap holders"
+      },
+      "berapaw": {
+        "role_name": "BeraPaw",
+        "description": "PawPal holders"
+      }
+    },
+    "discord_roles": {
+      "team": {
+        "role_name": "Team",
+        "emoji": "⛓️",
+        "description": "Official team members."
+      },
+      "admin": {
+        "role_name": "Admin",
+        "emoji": "🐼",
+        "description": "Admin of the Discord server."
+      },
+      "mod_lead": {
+        "role_name": "Mod Lead",
+        "emoji": "🛂",
+        "description": "Moderators in charge of the team."
+      },
+      "mod": {
+        "role_name": "Mod",
+        "emoji": "🛂",
+        "description": "Moderators of the server."
+      },
+      "bera_helper": {
+        "role_name": "Bera Helper",
+        "emoji": "🪪",
+        "description": "Volunteers who assist the community."
+      },
+      "verified_og_bong_bear_holder": {
+        "role_name": "Verified OG Bong Bear Holder",
+        "emoji": "🧸",
+        "description": "OG Bong Bear NFT holders."
+      },
+      "verified_bear_holder": {
+        "role_name": "Verified Bear Holder - Any Collection",
+        "emoji": "🐻",
+        "description": "Holders of any BERA NFTs."
+      },
+      "governance_pings": {
+        "role_name": "Governance Pings",
+        "description": "Receives pings for new governance proposals. Pings are currently disabled to avoid spam."
+      }
+    }
+  }
+  

@@ -1,36 +1,44 @@
-# Environment files
-.env
-.env.local
-.env.*.local
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
 
-# Credentials
-service-account.json
-credentials/
+# testing
+/coverage
 
-# Runtime files
-node_modules/
-dist/
-build/
-data/
-logs/
+# next.js
+/.next/
+/out/
 
-# OS files
+# production
+/build
+
+# misc
 .DS_Store
-Thumbs.db
+*.pem
 
-# IDE files
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# Debug logs
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock 
+# local env files
+.env*.local
+.env
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE
+.idea
+.vscode
+
+# Firebase
+.firebase/
+firebase-debug.log*
+ui-debug.log*

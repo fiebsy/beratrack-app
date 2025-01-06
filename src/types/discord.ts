@@ -69,6 +69,16 @@ export interface DiscordMessageReference {
   guildId: string;
 }
 
+export interface DiscordSticker {
+  id: string;
+  name: string;
+  formatType: number;
+  description: string | null;
+  asset: string;
+  packId?: string;
+  tags?: string[];
+}
+
 export interface DiscordMessage {
   id: string;
   type: string;
@@ -83,7 +93,7 @@ export interface DiscordMessage {
   reactions: DiscordReaction[];
   mentions: DiscordAuthor[];
   reference?: DiscordMessageReference;
-  stickers: any[];
+  stickers: DiscordSticker[];
 }
 
 export interface DiscordExport {

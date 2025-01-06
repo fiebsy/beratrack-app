@@ -1,4 +1,15 @@
 {
+  "database": [{
+    "target": "bera",
+    "rules": "database.rules.json"
+  }],
+  "targets": {
+    "database": {
+      "bera": [
+        "pickaxe-dashboard-bera"
+      ]
+    }
+  },
   "functions": {
     "source": "functions",
     "predeploy": [
@@ -12,6 +23,9 @@
     },
     "firestore": {
       "port": 8080
+    },
+    "database": {
+      "port": 9000
     },
     "ui": {
       "enabled": true,

@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "pickaxe-dashboard"
-  }
+  },
+  "targets": {
+    "pickaxe-dashboard": {
+      "database": {
+        "bera": [
+          "pickaxe-dashboard-bera"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

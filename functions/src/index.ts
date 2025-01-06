@@ -1,9 +1,35 @@
-import * as functions from 'firebase-functions';
+import { setGlobalOptions } from "firebase-functions/v2";
 import * as admin from 'firebase-admin';
+import { 
+  scheduledRolesUpdateV2, 
+  manualRolesUpdateV2 
+} from './berachain/roles/discord-roles';
+import {
+  scheduledRoleStatsUpdateV2,
+  manualRoleStatsUpdateV2
+} from './berachain/roles/activity-stats';
+import {
+  scheduledQualityScoresUpdateV2,
+  manualQualityScoresUpdateV2
+} from './berachain/roles/quality-scores';
 
+// Set global options
+setGlobalOptions({ 
+  maxInstances: 10,
+  memory: "256MiB",
+  timeoutSeconds: 60,
+  minInstances: 0
+});
+
+// Initialize Firebase Admin
 admin.initializeApp();
 
-export const helloWorld = functions.https.onRequest((request, response) => {
-  functions.logger.info("Hello logs!", {structuredData: true});
-  response.json({message: "Hello from Firebase!"});
-});
+// Export the roles functions
+export {
+  scheduledRolesUpdateV2,
+  manualRolesUpdateV2,
+  scheduledRoleStatsUpdateV2,
+  manualRoleStatsUpdateV2,
+  scheduledQualityScoresUpdateV2,
+  manualQualityScoresUpdateV2
+};
