@@ -135,10 +135,16 @@ Current formula weights (25% each):
 
 ### Environment Requirements
 ```typescript
-// Required env variables
-GOOGLE_CLOUD_PROJECT
-GOOGLE_APPLICATION_CREDENTIALS // For Vercel deployment
+# Environment Variables Required:
+
+```env
+# BigQuery Configuration
+GOOGLE_CLOUD_PROJECT=your_project_id
+GOOGLE_CLIENT_EMAIL=your_service_account_email
+GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYour Private Key Here\n-----END PRIVATE KEY-----"
 ```
+
+Make sure to properly format the private key with newlines when deploying to Vercel.
 
 ### Query Performance
 - Current query cost: ~1GB processed
