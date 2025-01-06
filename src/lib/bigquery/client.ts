@@ -6,7 +6,7 @@ const bigquery = new BigQuery({
   ...(process.env.VERCEL
     ? {
         // In Vercel, use the environment variable containing the full service account JSON
-        credentials: JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS || '{}')
+        credentials: JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON || '{}')
       }
     : {
         // In local development, use the service account file

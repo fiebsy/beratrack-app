@@ -6,7 +6,7 @@ const bigquery = new BigQuery({
   projectId: process.env.GOOGLE_CLOUD_PROJECT || 'pickaxe-dashboard',
   ...(process.env.VERCEL
     ? {
-        credentials: JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS || '{}')
+        credentials: JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON || '{}')
       }
     : {
         keyFilename: './service-account.json'
