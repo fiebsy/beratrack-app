@@ -68,7 +68,7 @@ export function RoleDialog({ role, onOpenChange }: RoleDialogProps) {
 
   if (!role) return null;
 
-  const tier = getQualityTier(role.avg_quality_score, role.badge, role.role_category);
+  const tier = getQualityTier(role.avg_quality_score, role.badge, role.role_category, role.active_users);
   const lastUpdated = new Date(role.last_updated).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
