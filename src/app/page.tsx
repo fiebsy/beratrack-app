@@ -2,8 +2,10 @@ import { GlossaryTable } from '@/components/glossary/table';
 import { StatsCards } from '@/components/glossary/stats-cards';
 import { getGlossaryData } from '@/lib/bigquery/glossary';
 
+// Force dynamic rendering and disable caching
 export const dynamic = 'force-dynamic';
-export const revalidate = 7200; // Revalidate every 2 hours
+export const fetchCache = 'force-no-store';
+export const revalidate = 0;
 
 export default async function HomePage() {
   const glossaryData = await getGlossaryData();

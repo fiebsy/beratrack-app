@@ -12,6 +12,10 @@ import {
   scheduledQualityScoresUpdateV2,
   manualQualityScoresUpdateV2
 } from './berachain/roles/quality-scores';
+import {
+  scheduledRoleChangeTrackerUpdateV2,
+  manualRoleChangeTrackerUpdateV2
+} from './berachain/roles/change-tracker';
 
 // Set global options
 setGlobalOptions({ 
@@ -31,5 +35,7 @@ export {
   scheduledRoleStatsUpdateV2,
   manualRoleStatsUpdateV2,
   scheduledQualityScoresUpdateV2,
-  manualQualityScoresUpdateV2
+  manualQualityScoresUpdateV2,
+  scheduledRoleChangeTrackerUpdateV2,
+  manualRoleChangeTrackerUpdateV2
 };

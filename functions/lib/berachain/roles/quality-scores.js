@@ -163,17 +163,20 @@ async function updateQualityScores() {
           total_users,
           active_users,
           base_quality_score,
-          -- Add size multiplier only for non-system roles
           CASE 
-            WHEN badge NOT IN ('TEAM', 'SYSTEM') AND role_category NOT IN ('Bot', 'Moderator') THEN
+            -- All single-member roles get heavily reduced
+            WHEN active_users <= 1 THEN 
+              base_quality_score * 0.01
+            -- Community roles get size multipliers
+            WHEN badge = 'COMMUNITY' THEN 
               CASE 
-                WHEN active_users < 5 THEN base_quality_score * 0.5  -- Very small groups
-                WHEN active_users < 20 THEN base_quality_score * 0.8 -- Small groups
-                WHEN active_users < 100 THEN base_quality_score * 1.0 -- Medium groups
+                WHEN active_users < 20 THEN base_quality_score * 0.8  -- Small groups
+                WHEN active_users < 100 THEN base_quality_score       -- Medium groups (baseline)
                 WHEN active_users < 500 THEN base_quality_score * 1.2 -- Large groups
-                ELSE base_quality_score * 1.5 -- Very large groups
+                ELSE base_quality_score * 1.5                         -- Very large groups
               END
-            ELSE base_quality_score -- Keep original score for system roles
+            -- Other roles keep base score
+            ELSE base_quality_score
           END as avg_quality_score
         FROM role_info
       )

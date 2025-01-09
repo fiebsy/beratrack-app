@@ -52,6 +52,8 @@ const config = {
         N920: "#202020",
         N930: "#191919",
         N940: "#131313",
+        GNEON: "#0BFF27",
+        RNEON: "#FF4444",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

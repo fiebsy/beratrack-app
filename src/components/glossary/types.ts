@@ -15,6 +15,11 @@ export interface GlossaryRole {
   last_updated: string;
   quality_rank?: number;
   total_roles?: number;
+  // Role change tracking data
+  additions?: number;
+  removals?: number;
+  last_addition_date?: string;
+  last_removal_date?: string;
 }
 
 export interface GlossaryTableProps {

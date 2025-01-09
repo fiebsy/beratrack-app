@@ -26,23 +26,30 @@ export async function getGlossaryData(): Promise<GlossaryRole[]> {
     ),
     role_metrics AS (
       SELECT
-        role_id,
-        role_name,
-        role_category,
-        role_description,
-        badge,
-        attainability_type,
-        attainability_source,
-        attainability_evidence,
-        active_users,
-        total_users as role_total_users,
+        g.role_id,
+        g.role_name,
+        g.role_category,
+        g.role_description,
+        g.badge,
+        g.attainability_type,
+        g.attainability_source,
+        g.attainability_evidence,
+        g.active_users,
+        g.total_users as role_total_users,
         (SELECT total_discord_users FROM discord_active_totals) as total_discord_users,
         (SELECT total_active_users FROM discord_active_totals) as total_active_users,
-        active_percentage,
-        COALESCE(ROUND(avg_quality_score, 2), 0) as avg_quality_score,
-        CAST(last_updated AS STRING) as last_updated,
-        is_verified
-      FROM \`pickaxe-dashboard.discord_berachain_roles.discord_roles_glossary\`
+        g.active_percentage,
+        COALESCE(ROUND(g.avg_quality_score, 2), 0) as avg_quality_score,
+        CAST(g.last_updated AS STRING) as last_updated,
+        g.is_verified,
+        -- Include role change tracking data
+        COALESCE(t.additions, 0) as additions,
+        COALESCE(t.removals, 0) as removals,
+        CAST(t.last_addition_date AS STRING) as last_addition_date,
+        CAST(t.last_removal_date AS STRING) as last_removal_date
+      FROM \`pickaxe-dashboard.discord_berachain_roles.discord_roles_glossary\` g
+      LEFT JOIN \`pickaxe-dashboard.discord_berachain_roles.role_change_tracker\` t
+        ON g.role_name = t.role_name
     ),
     ranked_roles AS (
       SELECT 
@@ -80,7 +87,12 @@ export async function getGlossaryData(): Promise<GlossaryRole[]> {
       last_updated: String(row.last_updated),
       is_verified: Boolean(row.is_verified),
       quality_rank: Number(row.quality_rank),
-      total_roles: Number(row.total_roles)
+      total_roles: Number(row.total_roles),
+      // Include role change tracking data
+      additions: Number(row.additions),
+      removals: Number(row.removals),
+      last_addition_date: row.last_addition_date ? String(row.last_addition_date) : undefined,
+      last_removal_date: row.last_removal_date ? String(row.last_removal_date) : undefined
     }));
   } catch (error) {
     console.error('Error fetching glossary data:', error);

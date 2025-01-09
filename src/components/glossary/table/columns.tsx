@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
-import { ArrowDown } from "@phosphor-icons/react";
+import { ArrowDown, ArrowUp, User } from "@phosphor-icons/react";
 import {
   Tooltip,
   TooltipContent,
@@ -14,9 +14,19 @@ import {
 import { cn } from "@/lib/utils";
 import { GlossaryRole } from "../types";
 import { PowerMeter } from "./power-meter";
-import { RarityMeter } from "./rarity-meter";
 import { getQualityTier } from "./quality-tier";
 import { BadgeMarker } from "./badge-marker";
+import { RoleStatus } from "./role-status";
+
+function formatNumber(num: number): string {
+  if (num >= 1000000) {
+    return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'm';
+  }
+  if (num >= 1000) {
+    return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+  }
+  return num.toString();
+}
 
 export const columns: ColumnDef<GlossaryRole>[] = [
   {
@@ -27,14 +37,14 @@ export const columns: ColumnDef<GlossaryRole>[] = [
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         className={cn(
-          "p-0 font-medium hover:bg-transparent hover:text-foreground text-xs ml-[44px]",
+          "p-0 font-medium hover:bg-transparent hover:text-foreground text-xs ml-[44px] flex items-center gap-3",
           column.getIsSorted() && "text-foreground"
         )}
       >
         Role
         <ArrowDown 
           className={cn(
-            "ml-2 h-3 w-3 transition-all duration-75 opacity-0",
+            "h-3 w-3 transition-all duration-75 opacity-0",
             "hover:opacity-100",
             column.getIsSorted() && [
               "opacity-100",
@@ -64,14 +74,13 @@ export const columns: ColumnDef<GlossaryRole>[] = [
               variant="ghost"
               onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
               className={cn(
-                "p-0 font-medium hover:bg-transparent hover:text-foreground text-xs",
+                "p-0 font-medium hover:bg-transparent hover:text-foreground text-xs w-full text-right flex items-center justify-end gap-3",
                 column.getIsSorted() && "text-foreground"
               )}
             >
-              Distribution
               <ArrowDown 
                 className={cn(
-                  "ml-2 h-3 w-3 transition-all duration-75 opacity-0",
+                  "h-3 w-3 transition-all duration-75 opacity-0",
                   "hover:opacity-100",
                   column.getIsSorted() && [
                     "opacity-100",
@@ -79,6 +88,7 @@ export const columns: ColumnDef<GlossaryRole>[] = [
                   ]
                 )}
               />
+              Distribution
             </Button>
           </TooltipTrigger>
           <TooltipContent>
@@ -98,8 +108,13 @@ export const columns: ColumnDef<GlossaryRole>[] = [
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <div>
-                <RarityMeter activeUsers={activeUsers} />
+              <div className="flex justify-end">
+                <div className="flex items-center gap-[6px]">
+                  <User weight="fill" className="w-[14px] h-[14px] text-muted-foreground/50" />
+                  <div className="text-sm text-muted-foreground font-mono">
+                    {formatNumber(activeUsers)}
+                  </div>
+                </div>
               </div>
             </TooltipTrigger>
             <TooltipContent>
@@ -114,6 +129,74 @@ export const columns: ColumnDef<GlossaryRole>[] = [
     },
   },
   {
+    accessorKey: "additions",
+    header: ({ column }) => (
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="ghost"
+              onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+              className={cn(
+                "p-0 font-medium hover:bg-transparent hover:text-foreground text-xs w-full text-right flex items-center justify-end gap-3",
+                column.getIsSorted() && "text-foreground"
+              )}
+            >
+              <ArrowDown 
+                className={cn(
+                  "h-3 w-3 transition-all duration-75 opacity-0",
+                  "hover:opacity-100",
+                  column.getIsSorted() && [
+                    "opacity-100",
+                    column.getIsSorted() === "asc" && "rotate-180"
+                  ]
+                )}
+              />
+              7 Day
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <TooltipTitle>7 Day Role Changes 📊</TooltipTitle>
+            <TooltipDescription>
+              Net changes in role membership over the last 7 days
+            </TooltipDescription>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    ),
+    cell: ({ row }) => {
+      const additions = row.original.additions || 0;
+      const removals = row.original.removals || 0;
+      const hasChanges = additions > 0 || removals > 0;
+      const netChange = additions - removals;
+
+      if (!hasChanges) {
+        return <div className="text-muted-foreground text-xs text-right w-full">-</div>;
+      }
+
+      return (
+        <div className="flex justify-end w-full">
+          <div className={cn(
+            "flex items-center gap-1 text-xs font-mono",
+            netChange > 0 ? "text-GNEON/80" : netChange < 0 ? "text-RNEON/80" : "text-muted-foreground"
+          )}>
+            {netChange > 0 ? (
+              <>
+                <ArrowUp weight="bold" className="w-3 h-3" />
+                <span>{formatNumber(netChange)}</span>
+              </>
+            ) : netChange < 0 ? (
+              <>
+                <ArrowDown weight="bold" className="w-3 h-3" />
+                <span>{formatNumber(Math.abs(netChange))}</span>
+              </>
+            ) : null}
+          </div>
+        </div>
+      );
+    },
+  },
+  {
     accessorKey: "avg_quality_score",
     enableSorting: true,
     header: ({ column }) => (
@@ -124,14 +207,13 @@ export const columns: ColumnDef<GlossaryRole>[] = [
               variant="ghost"
               onClick={() => column.toggleSorting()}
               className={cn(
-                "p-0 font-medium hover:bg-transparent hover:text-foreground text-xs",
+                "p-0 font-medium hover:bg-transparent hover:text-foreground text-xs w-full text-right flex items-center justify-end gap-3",
                 column.getIsSorted() && "text-foreground"
               )}
             >
-              Vibe Check
               <ArrowDown 
                 className={cn(
-                  "ml-2 h-3 w-3 transition-all duration-75 opacity-0",
+                  "h-3 w-3 transition-all duration-75 opacity-0",
                   "hover:opacity-100",
                   column.getIsSorted() && [
                     "opacity-100",
@@ -139,12 +221,13 @@ export const columns: ColumnDef<GlossaryRole>[] = [
                   ]
                 )}
               />
+              Vibe Check
             </Button>
           </TooltipTrigger>
           <TooltipContent>
             <TooltipTitle>COMMUNITY VIBE CHECK 🍯</TooltipTitle>
             <TooltipDescription>
-              Your BASED LEVEL comes from chat activity (30pts), reactions (25pts), replies (15pts), and convo starters (10pts). Bigger squads get up to 1.5x bonus fr fr 🔥
+              Based on chat activity + engagement, with multipliers for bigger squads fr fr 🔥
             </TooltipDescription>
           </TooltipContent>
         </Tooltip>
@@ -154,13 +237,15 @@ export const columns: ColumnDef<GlossaryRole>[] = [
       const score = row.getValue("avg_quality_score") as number;
       const badge = row.original.badge;
       const category = row.original.role_category;
-      const tier = getQualityTier(score, badge, category);
+      const active_users = row.original.active_users;
+      const tier = getQualityTier(score, badge, category, active_users);
+      const isTeamRole = (badge === "TEAM" || badge === "SYSTEM" || category === "Bot" || category === "Moderator") && score >= 30;
       
       return (
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <div>
+              <div className="flex justify-end">
                 <PowerMeter level={tier.fires} color={tier.color} />
               </div>
             </TooltipTrigger>
@@ -168,12 +253,66 @@ export const columns: ColumnDef<GlossaryRole>[] = [
               <TooltipTitle>
                 {score >= 0 ? `BASED LEVEL: ${score.toFixed(1)} 🔥` : 'TOO BASED TO MEASURE 👑'}
               </TooltipTitle>
-              <TooltipDescription>
-                {tier.tooltip}
-              </TooltipDescription>
+              <div className="flex flex-col gap-1">
+                <TooltipDescription>
+                  {tier.tooltip}
+                </TooltipDescription>
+                {isTeamRole && (
+                  <TooltipDescription className="text-muted-foreground">
+                    team role tho so kinda cheating 🫣
+                  </TooltipDescription>
+                )}
+              </div>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
+      );
+    },
+  },
+  {
+    accessorKey: "attainability_type",
+    enableSorting: true,
+    sortingFn: (rowA, rowB) => {
+      const a = rowA.getValue("attainability_type") as "OPEN" | "RESTRICTED" | "CLOSED" | "UNCLEAR";
+      const b = rowB.getValue("attainability_type") as "OPEN" | "RESTRICTED" | "CLOSED" | "UNCLEAR";
+      
+      // Custom sort order: OPEN > RESTRICTED > CLOSED > UNCLEAR
+      const sortOrder: Record<"OPEN" | "RESTRICTED" | "CLOSED" | "UNCLEAR", number> = {
+        "OPEN": 4,
+        "RESTRICTED": 3,
+        "CLOSED": 2,
+        "UNCLEAR": 1
+      };
+      return (sortOrder[a] || 0) - (sortOrder[b] || 0);
+    },
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        className={cn(
+          "p-0 font-medium hover:bg-transparent hover:text-foreground text-xs w-full text-right flex items-center justify-end gap-3",
+          column.getIsSorted() && "text-foreground"
+        )}
+      >
+        <ArrowDown 
+          className={cn(
+            "h-3 w-3 transition-all duration-75 opacity-0",
+            "hover:opacity-100",
+            column.getIsSorted() && [
+              "opacity-100",
+              column.getIsSorted() === "asc" && "rotate-180"
+            ]
+          )}
+        />
+        Role Status
+      </Button>
+    ),
+    cell: ({ row }) => {
+      const type = row.getValue("attainability_type") as string;
+      return (
+        <div className="flex justify-end">
+          <RoleStatus type={type} />
+        </div>
       );
     },
   }

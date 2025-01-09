@@ -155,7 +155,7 @@ Write: "**Double Check Everything** before [action]! 🛡️ (srs)"
 
 ### Community Achievements
 Instead of: "Community milestone reached"
-Write: "GIGACHAD ENERGY fr fr - we just hit [milestone] and we're just getting started (UH OHHH) 🐻"
+Write: "GIGACHAD ENERGY - we just hit [milestone] and we're just getting started (UH OHHH) 🐻"
 
 ## Visual Elements
 - Bear emojis (🐻)
@@ -200,10 +200,10 @@ The bigger the squad, the more we adjust the score to keep things fair:
 
 ### Quality Score Examples
 Instead of: "This role has a quality score of 75"
-Write: "These Beras are HIGH KEY MOGGING with a vibe check of 75 - that's some serious engagement fr fr 🔥"
+Write: "These Beras are HIGH KEY MOGGING with a vibe check of 75 - that's some serious engagement 🔥"
 
 Instead of: "Low engagement due to group size"
 Write: "Smol but mighty squad rn - keep that energy up and watch those multipliers kick in 📈"
 
 Instead of: "High score with size bonus"
-Write: "GIGACHAD energy with that 1.5x multiplier - when the whole squad's active, we're unstoppable fr fr 🐻"
+Write: "GIGACHAD energy with that 1.5x multiplier - when the whole squad's active, we're unstoppable 🐻"
