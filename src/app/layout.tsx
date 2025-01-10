@@ -18,10 +18,21 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={inter.className}>
-        <Navbar />
-        <main>
-          {children}
-        </main>
+        <div className="min-h-screen flex flex-col mt-5">
+          {/* Header Container */}
+          <header className="w-full ">
+            <div className="mx-auto max-w-[1200px] w-full px-4 nm:px-8 tablet:px-24">
+              <Navbar />
+            </div>
+          </header>
+
+          {/* Main Content Container */}
+          <main className="flex-1 w-full">
+            <div className="mx-auto max-w-[1200px] w-full px-4 nm:px-8 tablet:px-24 py-8">
+              {children}
+            </div>
+          </main>
+        </div>
       </body>
     </html>
   );

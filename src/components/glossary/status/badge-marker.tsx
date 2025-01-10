@@ -37,7 +37,7 @@ export function BadgeMarker({ type }: BadgeMarkerProps) {
   const colorClass = BADGE_COLORS[type];
   
   return (
-    <div className="relative inline-flex items-center justify-center w-6 h-6">
+    <div className="flex  items-center  justify-center w-[28px] h-[28px]">
       <svg 
         width="24" 
         height="24" 

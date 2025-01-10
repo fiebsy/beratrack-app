@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, ArrowUp, User } from "@phosphor-icons/react";
+import { ArrowDown, ArrowUp, ArrowUpRight, ArrowDownRight, User, CaretUp, CaretDown } from "@phosphor-icons/react";
 import {
   Tooltip,
   TooltipContent,
@@ -13,10 +13,14 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { GlossaryRole } from "../types";
-import { PowerMeter } from "./power-meter";
-import { getQualityTier } from "./quality-tier";
-import { BadgeMarker } from "./badge-marker";
-import { RoleStatus } from "./role-status";
+import { PowerMeter } from "../metrics/power-meter";
+import { getQualityTier } from "../utils/quality-tier";
+import { BadgeMarker } from "../status/badge-marker";
+import { RoleStatus } from "../status/role-status";
+import { PercentageBar } from "../metrics/percentage-bar";
+import { RankDisplay } from "../metrics/rank-display";
+import { formatBadgeText } from "../utils/utils";
+import { Badge } from "@/components/ui/badge";
 
 function formatNumber(num: number): string {
   if (num >= 1000000) {
@@ -66,6 +70,9 @@ export const columns: ColumnDef<GlossaryRole>[] = [
   },
   {
     accessorKey: "active_users",
+    enableSorting: true,
+    sortDescFirst: true,
+    sortingFn: "basic",
     header: ({ column }) => (
       <TooltipProvider>
         <Tooltip>
@@ -130,6 +137,12 @@ export const columns: ColumnDef<GlossaryRole>[] = [
   },
   {
     accessorKey: "additions",
+    enableSorting: true,
+    sortingFn: (rowA, rowB) => {
+      const netChangeA = (rowA.original.additions || 0) - (rowA.original.removals || 0);
+      const netChangeB = (rowB.original.additions || 0) - (rowB.original.removals || 0);
+      return netChangeA - netChangeB;
+    },
     header: ({ column }) => (
       <TooltipProvider>
         <Tooltip>
@@ -152,13 +165,13 @@ export const columns: ColumnDef<GlossaryRole>[] = [
                   ]
                 )}
               />
-              7 Day
+              14 Day
             </Button>
           </TooltipTrigger>
           <TooltipContent>
-            <TooltipTitle>7 Day Role Changes 📊</TooltipTitle>
+            <TooltipTitle>Role Status Changes 👀</TooltipTitle>
             <TooltipDescription>
-              Net changes in role membership over the last 7 days
+              Changes in role assignments among consistently active beras (comparing 14 days ago vs now)
             </TooltipDescription>
           </TooltipContent>
         </Tooltip>
@@ -175,24 +188,46 @@ export const columns: ColumnDef<GlossaryRole>[] = [
       }
 
       return (
-        <div className="flex justify-end w-full">
-          <div className={cn(
-            "flex items-center gap-1 text-xs font-mono",
-            netChange > 0 ? "text-GNEON/80" : netChange < 0 ? "text-RNEON/80" : "text-muted-foreground"
-          )}>
-            {netChange > 0 ? (
-              <>
-                <ArrowUp weight="bold" className="w-3 h-3" />
-                <span>{formatNumber(netChange)}</span>
-              </>
-            ) : netChange < 0 ? (
-              <>
-                <ArrowDown weight="bold" className="w-3 h-3" />
-                <span>{formatNumber(Math.abs(netChange))}</span>
-              </>
-            ) : null}
-          </div>
-        </div>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div className="flex justify-end w-full">
+                <div className={cn(
+                  "flex items-center gap-2 text-xs font-mono relative",
+                  netChange > 0 ? "text-GNEON/80" : netChange < 0 ? "text-RNEON/80" : "text-muted-foreground"
+                )}>
+                  {netChange > 0 ? (
+                    <>
+                      <ArrowUp weight="bold" className="w-3 h-3" />
+                      <span>{formatNumber(netChange)}</span>
+                      {additions >= 100 && <span className="absolute hidden -right-7">🔥</span>}
+                    </>
+                  ) : netChange < 0 ? (
+                    <>
+                      <ArrowDown weight="bold" className="w-3 h-3" />
+                      <span>{formatNumber(Math.abs(netChange))}</span>
+                    </>
+                  ) : null}
+                </div>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent>
+              <TooltipDescription className="flex flex-col gap-1">
+                <span className="font-medium">
+                  {netChange > 0 
+                    ? `mods blessing the fam 🎁 `
+                    : netChange < 0 
+                    ? `mods taking back their gifts ngl 🫳 `
+                    : "mods sleeping on this one 😴"}
+                </span>
+                <div className="text-xs text-muted-foreground flex flex-col gap-1">
+                  <div className="text-GNEON/80">+{additions} roles added 🙏</div>
+                  <div className="text-RNEON/80">-{removals} roles snatched 🫳</div>
+                </div>
+              </TooltipDescription>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       );
     },
   },
@@ -308,7 +343,7 @@ export const columns: ColumnDef<GlossaryRole>[] = [
       </Button>
     ),
     cell: ({ row }) => {
-      const type = row.getValue("attainability_type") as string;
+      const type = row.getValue("attainability_type") as "OPEN" | "CLOSED" | "RESTRICTED" | "UNCLEAR";
       return (
         <div className="flex justify-end">
           <RoleStatus type={type} />

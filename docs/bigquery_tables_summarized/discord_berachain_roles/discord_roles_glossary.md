@@ -67,12 +67,23 @@ END as avg_quality_score
 ```
 
 ### Score Interpretation
-- **0-20**: Early days (time to level up)
-- **20-25**: Getting started (energy rising)
-- **25-30**: Solid energy (putting in work)
-- **30-35**: Major vibes (going astronomical)
-- **35-40**: High key based (absolutely demolishing)
-- **40+**: Gigachad energy (mogging the leaderboard)
+- **0-25**: Early days (time to level up) [1 bar]
+- **25-30**: Solid energy (putting in work) [2 bars]
+- **30-35**: Major vibes (going astronomical) [3 bars]
+- **35-40**: High key based (absolutely demolishing) [4 bars]
+- **40+**: Gigachad energy (mogging the leaderboard) [5 bars]
+
+### Power Meter Visualization
+The quality score is visualized using a power meter with 1-5 bars:
+1. **1 Bar**: Scores below 25 - Early days
+2. **2 Bars**: Scores 25-29 - Solid progress
+3. **3 Bars**: Scores 30-34 - Major engagement
+4. **4 Bars**: Scores 35-39 - High performance
+5. **5 Bars**: Scores 40+ - Maximum energy
+
+Special cases:
+- Single member roles always show 1 bar
+- Team/System roles maintain normal scaling but get a "kinda cheating" indicator
 
 ## Table Schema
 

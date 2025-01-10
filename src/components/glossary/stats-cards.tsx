@@ -15,26 +15,36 @@ export function StatsCards({ glossaryData }: StatsCardsProps) {
   }).length;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div className="rounded-lg border p-4">
-        <div className="text-sm font-medium text-muted-foreground">Active Squad</div>
-        <div className="text-2xl font-bold">{totalActiveUsers.toLocaleString()}</div>
-        <div className="text-sm text-muted-foreground mt-1">
-          Members chatting in the last 30 days 🐻
+    <div className="desktop:flex desktop:flex-col desktop:gap-4">
+      <div className="flex desktop:flex-col justify-between desktop:justify-start gap-6 desktop:gap-4">
+        <div className="flex flex-col items-start">
+          <div className="text-muted-foreground text-sm">Active Users</div>
+          <div className="text-2xl font-semibold tabular-nums">
+            {totalActiveUsers.toLocaleString()}
+          </div>
+          <div className="text-muted-foreground/50 text-sm">
+            Beras active in 30 days 🐻
+          </div>
         </div>
-      </div>
-      <div className="rounded-lg border p-4">
-        <div className="text-sm font-medium text-muted-foreground">Buzzing Roles</div>
-        <div className="text-2xl font-bold">{activeRoles}</div>
-        <div className="text-sm text-muted-foreground mt-1">
-          Roles with active conversations 🍯
+
+        <div className="flex flex-col items-start">
+          <div className="text-muted-foreground text-sm">Active Roles</div>
+          <div className="text-2xl font-semibold tabular-nums">
+            {activeRoles}
+          </div>
+          <div className="text-muted-foreground/50 text-sm">
+            Roles with activity 🍯
+          </div>
         </div>
-      </div>
-      <div className="rounded-lg border p-4">
-        <div className="text-sm font-medium text-muted-foreground">Elite Roles</div>
-        <div className="text-2xl font-bold">{highEngagementRoles}</div>
-        <div className="text-sm text-muted-foreground mt-1">
-          Top performers with quality score above 30 ⚡
+
+        <div className="flex flex-col items-start">
+          <div className="text-muted-foreground text-sm">Elite Roles</div>
+          <div className="text-2xl font-semibold tabular-nums">
+            {highEngagementRoles}
+          </div>
+          <div className="text-muted-foreground/50 text-sm">
+            High engagement roles 🔥
+          </div>
         </div>
       </div>
     </div>

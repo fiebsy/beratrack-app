@@ -2,6 +2,7 @@
 
 import { GlossaryRole } from "./types";
 import { SegmentedControl } from "@/components/ui/segmented-control";
+import { cn } from "@/lib/utils";
 
 const roleTypes = [
   { label: "All", value: "" },
@@ -20,12 +21,17 @@ interface RoleFilterProps {
 
 export function RoleFilter({ value, onChange, className }: RoleFilterProps) {
   return (
-    <SegmentedControl
-      options={roleTypes}
-      value={value}
-      onChange={onChange}
-      className={className}
-    />
+    <div className={cn("relative w-full", className)}>
+      <div className="overflow-x-auto scrollbar-none [&::-webkit-scrollbar]{display:none} [-ms-overflow-style:none] [scrollbar-width:none]">
+        <div className="min-w-fit">
+          <SegmentedControl
+            options={roleTypes}
+            value={value}
+            onChange={onChange}
+          />
+        </div>
+      </div>
+    </div>
   );
 }
 

@@ -1,6 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import { GlossaryRole } from "../types";
+import { columns } from "./columns";
+import { RoleDialog } from "../dialog";
+import {
+  ColumnFiltersState,
+  SortingState,
+  VisibilityState,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 import {
   Table,
   TableBody,
@@ -9,30 +23,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  ColumnFiltersState,
-  SortingState,
-  VisibilityState,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
 import { SearchInput } from "@/components/ui/search-input";
-import { columns } from "./columns";
-import { GlossaryRole } from "../types";
 import { RoleFilter } from "../role-filter";
-import { RoleDialog } from "./role-dialog";
 
 interface GlossaryTableProps {
   data: GlossaryRole[];
 }
 
 export function GlossaryTable({ data }: GlossaryTableProps) {
-  // Initialize with avg_quality_score sorted descending (high to low)
+  // Initialize with active_users sorted descending (high to low)
   const [sorting, setSorting] = useState<SortingState>([
-    { id: "avg_quality_score", desc: true },
+    { id: "active_users", desc: true },
   ]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility] = useState<VisibilityState>({
@@ -96,16 +97,29 @@ export function GlossaryTable({ data }: GlossaryTableProps) {
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center gap-4">
+      <div className="flex flex-col desktop:flex-row desktop:justify-between desktop:items-center gap-4">
         <RoleFilter
           value={table.getColumn("badge")?.getFilterValue() as string ?? ""}
           onChange={handleFilterChange}
+          className="w-full desktop:max-w-[600px]"
         />
-        <SearchInput
-          placeholder="Search roles..."
-          onSearch={handleSearch}
-          className="max-w-[220px]"
-        />
+        {/* Desktop collapsible search */}
+        <div className="hidden desktop:flex justify-end">
+          <SearchInput
+            placeholder="Search roles..."
+            onSearch={handleSearch}
+            className="max-w-[220px]"
+          />
+        </div>
+        {/* Mobile/tablet full-width search */}
+        <div className="block desktop:hidden">
+          <SearchInput
+            placeholder="Search roles..."
+            onSearch={handleSearch}
+            variant="open"
+            className="w-full max-w-[540px]"
+          />
+        </div>
       </div>
       <div className="rounded-md border">
         <Table>
