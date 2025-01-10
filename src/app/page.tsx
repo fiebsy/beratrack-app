@@ -14,7 +14,7 @@ export default async function HomePage() {
   return (
     <div className="flex flex-col gap-[60px]">
       <div>
-        <div className="text-3xl max-w-[500px] mb-[60px]">
+        <div className="text-3xl max-w-[540px] mb-[40px]">
           <span className="text-foreground">
             The Beratrack role tracker 
           </span>
@@ -26,6 +26,9 @@ export default async function HomePage() {
       </div>
 
       <div className="w-full overflow-visible">
+      <div className="flex text-2xl text-muted-foreground mb-4">
+        Roles
+      </div>
         <GlossaryTable data={glossaryData} />
       </div>
     </div>
