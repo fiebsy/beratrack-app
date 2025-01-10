@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, ArrowUp, ArrowUpRight, ArrowDownRight, User, CaretUp, CaretDown } from "@phosphor-icons/react";
+import { ArrowDown, ArrowUp, User } from "@phosphor-icons/react";
 import {
   Tooltip,
   TooltipContent,
@@ -17,10 +17,6 @@ import { PowerMeter } from "../metrics/power-meter";
 import { getQualityTier } from "../utils/quality-tier";
 import { BadgeMarker } from "../status/badge-marker";
 import { RoleStatus } from "../status/role-status";
-import { PercentageBar } from "../metrics/percentage-bar";
-import { RankDisplay } from "../metrics/rank-display";
-import { formatBadgeText } from "../utils/utils";
-import { Badge } from "@/components/ui/badge";
 
 function formatNumber(num: number): string {
   if (num >= 1000000) {

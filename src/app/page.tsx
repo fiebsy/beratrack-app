@@ -1,4 +1,3 @@
-import { StatsCards } from "@/components/glossary/stats-cards";
 import { getGlossaryData } from '@/lib/bigquery/glossary';
 import { FeatureList } from "@/components/landing/feature-list";
 import { GlossaryTable } from '@/components/glossary/table';
@@ -18,17 +17,16 @@ export default async function HomePage() {
           <span className="text-foreground">
             The Beratrack role tracker 
           </span>
-          <span className="text-muted-foreground"> is your unofficial guide to Berachain Discord roles — see what's attainable, who's active, and how roles shift.
+          <span className="text-muted-foreground"> is your unofficial guide to Berachain Discord roles &mdash; see what&apos;s attainable, who&apos;s active, and how roles shift.
           </span>
           <FeatureList glossaryData={glossaryData} />
-
         </div>
       </div>
 
       <div className="w-full overflow-visible">
-      <div className="flex text-2xl text-muted-foreground mb-4">
-        Roles
-      </div>
+        <div className="flex text-2xl text-muted-foreground mb-4">
+          Roles
+        </div>
         <GlossaryTable data={glossaryData} />
       </div>
     </div>

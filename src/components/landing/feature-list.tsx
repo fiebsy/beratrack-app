@@ -17,7 +17,7 @@ export function FeatureList({ glossaryData }: FeatureListProps) {
   const avgQuality = glossaryData.reduce((acc, role) => acc + role.avg_quality_score, 0) / glossaryData.length;
 
   return (
-    <div className="mt-8 grid grid-cols-2 tablet:grid-cols-2 gap-y-6 gap-x-12">
+    <div className="mt-8 grid grid-cols-2 tablet:grid-cols-2 gap-y-6 gap-x-12 max-w-[400px]">
       <div className="flex items-start gap-3">
         <ArrowElbowDownRight className="mt-1 text-theme" size={20} weight="bold" />
         <div>
